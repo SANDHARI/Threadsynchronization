@@ -24,11 +24,20 @@ public synchronized  void increment(){
                 }
             }
         });
+        Thread t3 = new Thread(new Runnable(){
+            public void run(){
+                for(int i = 0; i<=10000; i++){
+                    increment();
+                }
+            }
+        });
         t1.start();
         t2.start();
+        t3.start();
         try {
             t1.join();
             t2.join();
+            t3.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
